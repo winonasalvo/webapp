@@ -9,3 +9,7 @@ def home():
 @views.route('/sign-up')
 def sign_up():
     return render_template("sign_up.html", boolean=True)
+
+@views.route('/login')
+def login():
+    return render_template("login.html", boolean=True)

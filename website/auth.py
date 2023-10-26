@@ -6,8 +6,8 @@ auth = Blueprint('auth', __name__)
 def sign_up():
     if request.method == 'POST':
         id = request.form.get('id')
-        firstName = request.form.get('firstName')
-        lastName = request.form.get('lastName')
+        fName = request.form.get('firstName')
+        lName = request.form.get('lastName')
         course = request.form.get('course')
         year = request.form.get('year')
         gender = request.form.get('gender')

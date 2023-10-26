@@ -1,0 +1,34 @@
+{% extends 'base.html' %}{% block title %}Student Data{% endblock %}
+
+{% block content %}
+<div>
+    <div class="row mt-2">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Course</th>
+                <th>Year Level</th>
+                <th>Gender</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in student %}
+                <tr>
+                    <td>{{student['id']}}</td>
+                    <td>{{student['firstname']}}</td>
+                    <td>{{student['lastname']}}</td>
+                    <td>{{student['course']}}</td>
+                    <td>{{student['year']}}</td>
+                    <td>{{student['gender']}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock content %}

@@ -11,5 +11,5 @@ class StudentForm(FlaskForm):
     lname = StringField('Last Name', [validators.DataRequired(), validators.Length(max=50)])
     gender = SelectField('Gender', choices=gengen)
     year = SelectField('Year Level', choices= year_level)
-    course = SelectField('Course', [validators.DataRequired(), validators.Length(max=50)])
+    course = StringField('Course', [validators.DataRequired(), validators.Length(max=50)])
     submit = SubmitField("Save")

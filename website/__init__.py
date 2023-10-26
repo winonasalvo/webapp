@@ -6,7 +6,7 @@ mysql = pymysql.connect(host='localhost',
                              user='root',
                              password='1234',
                              database='student_database',
-                             #charset='utf8mb4',
+                             charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
 
 def create_app():

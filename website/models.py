@@ -13,8 +13,7 @@ class Students(object):
     def add(self):
         curs = mysql.cursor()
 
-        sql = f"INSERT INTO data(id,fname,lname,gender,year,course) \
-                VALUES('{self.id}','{self.fname}','{self.lname}','{self.gender}','{self.year}','{self.course}')" 
+        sql = f"INSERT INTO student (`id`, `fname`, `lname`, `course`, `year`, `gender`) VALUES('{self.id}', '{self.fname}', '{self.lname}', '{self.course}', '{self.year}', '{self.gender}')"
 
         curs.execute(sql)
         mysql.commit()
@@ -28,18 +27,26 @@ class Students(object):
         return result
 
     @classmethod
-    def edit(cls, idnumber):
+    def edit(cls, id):
         curs = mysql.cursor()
-        sql = f"SELECT * from data where STUDENTID = {idnumber}" 
+        sql = f"SELECT * from student where 'id' = '{id}'" 
         curs.execute(sql)
         id = curs.fetchall()
         return id
 
     @classmethod
-    def update(cls, id):
+    def update(self, id):
         try:
             curs = mysql.cursor()
-            sql = f"UPDATE from data where STUDENTID= {id}"
+            sql = f''' UPDATE students
+                SET 
+                    fname = '{self.fname}',
+                    lname = '{self.lname}',
+                    year = {self.year},
+                    gender = '{self.gender}',
+                    course = '{self.course}',
+                WHERE
+                    id = '{id}' '''
             curs.execute(sql)
             mysql.commit()
             return True

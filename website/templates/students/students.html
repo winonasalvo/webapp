@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="newreg">
-        <a href={{url_for('student.data_students_page')}} class="btn btn-primary">New </a>
+        <a href="{{ url_for('student.data_students_page') }}" class="btn btn-primary">New </a>
         <div class = "search-container">
         <input type="text" placeholder="Search.." name="search">
         <button type="submit"><i class="fa fa-search"></i></button>
@@ -30,11 +30,16 @@
             {% for student in student %}
                 <tr>
                     <td>{{student['id']}}</td>
-                    <td>{{student['firstname']}}</td>
-                    <td>{{student['lastname']}}</td>
+                    <td>{{student['fname']}}</td>
+                    <td>{{student['lname']}}</td>
                     <td>{{student['course']}}</td>
                     <td>{{student['year']}}</td>
                     <td>{{student['gender']}}</td>
+                
+                    <td>
+                        <a href = "{{ url_for('student.edit_students_page', id = student.id ) }}" ><button  class="btn btn-warning" >Edit</button></a>
+                        <button class="btn btn-danger btn-delete" id="{{ student[0]}}">Delete</button>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

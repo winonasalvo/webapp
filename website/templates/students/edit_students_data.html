@@ -2,11 +2,11 @@
 
 {%block content%}
 <div class = "form form-group" >
-    {%block header%}<h1>Student Data</h1>{%endblock%}
+    {%block header%}<h1> Edit Student Data</h1>{%endblock%}
 
-    <form method = "POST" >
+    <form method = "POST"  >
         {{ form.hidden_tag() }}
-
+    
         {{form.id.label(class = "form-label")}}
         {{ form.id(class = "form-control") }}
         <br/>
@@ -22,12 +22,19 @@
         {{form.year.label(class = "form-label")}}
         {{ form.year(class = "form-select") }}
         <br/>
+        
         {{form.course.label(class = "form-label")}}
         {{ form.course(class = "form-control") }}
-    
+
         <br/><br/>
 
-        <button type="reset" class = "btn btn-danger"> Cancel </button>
+        <!---<button type="reset" class = "btn btn-danger"> Cancel </button>--->
+        <button onclick="goBack()" class = "btn btn-danger">Cancel</button>
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
         {{ form.submit(class = "btn btn-primary")}}
     </form>
 </div>

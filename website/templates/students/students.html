@@ -1,6 +1,17 @@
 {% extends 'base.html' %}{% block title %}Student Data{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="newreg">
+        <a href={{url_for('student.data_students_page')}} class="btn btn-primary">New </a>
+        <div class = "search-container">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</div>
+<div>
+
 <div>
     <div class="row mt-2">
         <table class="table">

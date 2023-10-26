@@ -31,22 +31,39 @@ def data_students_page():
 def edit_students_page(id):
     form = StudentForm()
     data = models.Students.edit(id)
+    
     print(data)
+
+    #print(data.id)
     if request.method == 'POST' and form.validate():
-        data.id = request.form['id']
-        data.fname = request.form['fname']
-        data.lname = request.form['lname']
-        data.gender = request.form['gender']
-        data.year = request.form['year']
-        data.course = request.form['course']
-        """try:
-            flash("Update Success!")
-            print(data)
-            return render_template("students/edit_students_data.html", form = form, data = data)
-        except:
-            flash("Update Success!")
-            print(data)
-            return render_template("students/edit_students_data.html", form = form, data = data)"""
+        students = models.Students(id = form.id.data, fname=form.fname.data, lname=form.lname.data, gender=form.gender.data, year= form.year.data, course=form.course.data)
+        print("students", students)
+        print(data[0]['id'])
+        print(students.fname)
+        students.update(id) 
+        print("students added")
+        
+        flash("Update Success!")
+        return redirect('/')
+ 
     else:
         print("else")
         return render_template('students/edit_students_data.html', form = form)
+
+@student.route('/delete_student/<id>', methods=['POST'])
+def delete_row(id):
+    form = StudentForm()
+    print(id)
+    data = models.Students.delete(id)
+
+    flash('Delete Success!')
+    print("flash")
+    return redirect('/')
+    if data == True:
+        flash('Delete Success!')
+    else:
+        flash('Delete was not successful.')
+    
+
+
+

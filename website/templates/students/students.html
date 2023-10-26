@@ -38,7 +38,7 @@
                 
                     <td>
                         <a href = "{{ url_for('student.edit_students_page', id = student.id ) }}" ><button  class="btn btn-warning" >Edit</button></a>
-                        <button class="btn btn-danger btn-delete" id="{{ student[0]}}">Delete</button>
+                        <button class="btn btn-danger btn-delete" id="{{ student['id']}}" onclick="deleteStudent(this.id)">Delete</button>
                     </td>
                 </tr>
             {% endfor %}

@@ -18,6 +18,20 @@ class Students(object):
         curs.execute(sql)
         mysql.commit()
 
+    def update(self, id):
+        curs = mysql.cursor()
+        sql = f''' UPDATE student
+            SET 
+                id = '{self.id}', 
+                fname = '{self.fname}', 
+                lname = '{self.lname}', 
+                course = '{self.course}',
+                year = '{self.year}', 
+                gender = '{self.gender}' WHERE id = '{id}'; '''
+        print(sql)
+        curs.execute(sql)
+        mysql.commit()
+
     @classmethod
     def all(cls):
         curs = mysql.cursor()
@@ -29,35 +43,16 @@ class Students(object):
     @classmethod
     def edit(cls, id):
         curs = mysql.cursor()
-        sql = f"SELECT * from student where 'id' = '{id}'" 
+        sql = f"SELECT * from student WHERE `id` = '{id}'" 
         curs.execute(sql)
         id = curs.fetchall()
         return id
 
     @classmethod
-    def update(self, id):
-        try:
-            curs = mysql.cursor()
-            sql = f''' UPDATE students
-                SET 
-                    fname = '{self.fname}',
-                    lname = '{self.lname}',
-                    year = {self.year},
-                    gender = '{self.gender}',
-                    course = '{self.course}',
-                WHERE
-                    id = '{id}' '''
-            curs.execute(sql)
-            mysql.commit()
-            return True
-        except:
-            return False
-
-    @classmethod
     def delete(cls,id):
         try:
             curs = mysql.cursor()
-            sql = f"DELETE from users where id= {id}"
+            sql = f"DELETE from student where `id`= '{id}'"
             curs.execute(sql)
             mysql.commit()
             return True

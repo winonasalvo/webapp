@@ -16,7 +16,7 @@ def data_students_page():
     form = StudentForm()
     if request.method == 'POST' and form.validate():
         students = models.Students(id = form.id, fname=form.fname, lname= form.lname, gender=form.gender, year= form.year, course=form.course)
-        form.course.choices = [(models.Courses.populate())]
+        #form.course.choices = [(models.Courses.populate())]
         students.add()
         return redirect('/')
     else:

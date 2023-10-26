@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class = "form form-group" >
+    {%block header%}<h1>Student Data</h1>{%endblock%}
+
+    <form method = "POST" action= "/" >
+        {{ form.hidden_tag() }}
+
+        {{form.id.label(class = "form-label")}}
+        {{ form.id(class = "form-control") }}
+        <br/>
+        {{form.fname.label(class = "form-label")}}
+        {{ form.fname(class = "form-control") }}
+        <br/>
+        {{form.lname.label(class = "form-label")}}
+        {{ form.lname(class = "form-control") }}
+        <br/>
+        {{form.gender.label(class = "form-label")}}
+        {{ form.gender(class = "form-select") }}
+        <br/>
+        {{form.year.label(class = "form-label")}}
+        {{ form.year(class = "form-select") }}
+        <br/>
+        {{form.course.label(class = "form-label")}}
+        {{ form.course(class = "form-control") }}
+    
+        <br/><br/>
+
+        <button type="reset" class = "btn btn-danger"> Cancel </button>
+        {{ form.submit(class = "btn btn-primary")}}
+    </form>
+</div>
+{%endblock%}

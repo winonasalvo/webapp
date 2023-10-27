@@ -1,0 +1,25 @@
+{%extends 'base.html'%}{%block title%}Available Colleges{%endblock title%}
+{%block content%}
+<div >
+      <div class="row mt-2">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Collge</th>
+                <th>College Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+        {% for college in colleges %}
+            <tr>
+              <td>{{college['college_code']}}</td>
+              <td>{{college['college_name']}}</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{%endblock content%}

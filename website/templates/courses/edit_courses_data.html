@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class = "form form-group" >
+    {%block header%}<h1> Edit Course Data</h1>{%endblock%}
+
+    <form method = "POST"  >
+        {{ form.hidden_tag() }}
+    
+        {{form.course_code.label(class = "form-label")}}
+        {{ form.course_code(class = "form-control") }}
+        <br/>
+        {{form.course_name.label(class = "form-label")}}
+        {{ form.course_name(class = "form-control") }}
+        <br/>
+        {{form.college.label(class = "form-label")}}
+        {{ form.college(class = "form-select") }}
+        <br/><br/>
+
+
+        <!---<button type="reset" class = "btn btn-danger"> Cancel </button>--->
+        <button onclick="goBack()" class = "btn btn-danger">Cancel</button>
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
+        {{ form.submit(class = "btn btn-primary")}}
+    </form>
+</div>
+{%endblock%}

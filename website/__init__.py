@@ -17,10 +17,12 @@ def create_app():
     from .auth import auth
     from .views.students.route import student
     from .views.course.route import course
+    from .views.college.route import college
 
     app.register_blueprint(view, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(student, url_prefix='/')
     app.register_blueprint(course, url_prefix='/')
+    app.register_blueprint(college, url_prefix='/')
 
     return app

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from website import mysql
 import website.models as models
-from website.views.students.forms import StudentForm
+from website.views.course.forms import CourseForm
 
 course = Blueprint('course', __name__)
 
@@ -11,58 +11,58 @@ def course_page():
     print(courses)
     return render_template('courses/courses.html', course = courses)
 
-"""
-@student.route('/data_students', methods=['POST','GET'])
-def data_students_page():
-    form = StudentForm()
-    print(form.id)
+@course.route('/data_courses', methods=['POST','GET'])
+def data_courses_page():
+    form = CourseForm()
+    print(form.course_code)
     print("form added")
     if request.method == 'POST' and form.validate(): 
-        students = models.Students(id = form.id.data, fname=form.fname.data, lname=form.lname.data, gender=form.gender.data, year= form.year.data, course=form.course.data)
+        courses = models.Courses(course_code=form.course_code.data, course_name=form.course_name.data, college=form.college.data)
         #form.course.choices = [(models.Courses.populate())]  
-        print(students)      
-        students.add() 
-        print("students added")
-        return redirect('/')
+        print(courses)      
+        courses.add() 
+        print("courses added")
+        return redirect('/courses')
     
     else:
-        return render_template('students/data_students.html', form = form)
-    
-@student.route('/edit_students/<id>', methods=['GET','POST'])
-def edit_students_page(id):
-    form = StudentForm()
-    data = models.Students.edit(id)
+        return render_template('courses/data_courses.html', form = form)
+
+  
+@course.route('/edit_course/<course_code>', methods=['GET','POST'])
+def edit_courses_page(course_code):
+    form = CourseForm()
+    data = models.Courses.edit(course_code)
     
     print(data)
 
     #print(data.id)
     if request.method == 'POST' and form.validate():
-        students = models.Students(id = form.id.data, fname=form.fname.data, lname=form.lname.data, gender=form.gender.data, year= form.year.data, course=form.course.data)
-        print("students", students)
-        print(data[0]['id'])
-        print(students.fname)
-        students.update(id) 
-        print("students added")
+        courses = models.Courses(course_code=form.course_code.data, course_name=form.course_name.data, college=form.college.data)
+        print("courses", courses)
+        print(data[0]['course_code'])
+
+        courses.update(course_code) 
         
         flash("Update Success!")
-        return redirect('/')
+        return redirect('/courses')
  
     else:
         print("else")
-        return render_template('students/edit_students_data.html', form = form)
+        return render_template('courses/edit_courses_data.html', form = form)
 
-@student.route('/delete_student/<id>', methods=['POST'])
-def delete_row(id):
-    form = StudentForm()
-    print(id)
-    data = models.Students.delete(id)
+@course.route('/delete_course/<course_code>', methods=['POST'])
+def delete_course_row(course_code):
+    form = CourseForm()
+    print(course_code)
+    data = models.Courses.delete_course(course_code)
+    print(data)
+    data = models.Courses.delete(course_code)
 
-    flash('Delete Success!')
-    print("flash")
-    return redirect('/')
     if data == True:
         flash('Delete Success!')
+        print("flash")
+        return redirect('/courses')
+        
     else:
         flash('Delete was not successful.')
-    
-"""
+        return redirect('/data_courses')

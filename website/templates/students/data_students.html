@@ -27,7 +27,14 @@
     
         <br/><br/>
 
-        <button type="reset" class = "btn btn-danger"> Cancel </button>
+
+        <!---<button type="reset" class = "btn btn-danger"> Cancel </button>--->
+        <button onclick="goBack()" class = "btn btn-danger">Cancel</button>
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
         {{ form.submit(class = "btn btn-primary")}}
     </form>
 </div>

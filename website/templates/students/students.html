@@ -12,6 +12,40 @@
 </div>
 <div>
 
+<!--- <table class="table table-hover caption-top table-responsive-xl">
+        <caption>
+            <div id="caption">
+                <div class="d-flex align-items-center caption-upper">
+                    <h4 class="p-2" id="table-title">Student Information</h4>
+                </div>
+                <div class="pt-3 pb-3 d-flex align-items-center caption-lower">
+                    <form class="pt-3 pb-3 d-flex align-items-center caption-lower" method="post" action="{{ url_for('student.search') }}">
+                        <select id="field" name="field" class="form-select p-2">
+                            <option value="select">Select Field</option>
+                            <option value="id">Student ID</option>
+                            <option value="first">First Name</option>
+                            <option value="middle">Middle Name</option>
+                            <option value="last">Last Name</option>
+                            <option value="gender">Gender</option>
+                            <option value="year">Year Level</option>
+                            <option value="course">Course</option>
+                        </select>
+                        <input id="searchField" type="text" class="p-2 m-2 searchfield" name="user-input" placeholder="Type to search using ID, Name, Gender, Level, and Course">
+                        <button class="btn-search">
+                            <div class="search">
+                                <div class="icon"></div>
+                            </div>
+                        </button>
+                    </form>
+                    <form class="p-2" action="{{ url_for('student.students') }}">
+                        <label for="limit-field">Show </label>
+                        <input id="limit-field" name="limit-field" type="number" value="{{student_limit}}" min="5" max="{{datacount}}">
+                        <label for="limit-field"> students</label>
+                    </form>
+                </div>
+            </div>
+        </caption>-->
+
 <div>
     <div class="row mt-2">
         <table class="table">

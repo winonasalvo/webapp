@@ -3,14 +3,15 @@ from website import mysql
 import website.models as models
 from website.views.students.forms import StudentForm
 
-student = Blueprint('student', __name__)
+course = Blueprint('course', __name__)
 
-@student.route('/')
-def students_page():
-    students = models.Students.all()
-    print(students)
-    return render_template('students/students.html', student = students)
+@course.route('/courses')
+def course_page():
+    courses = models.Courses.all()
+    print(courses)
+    return render_template('courses/courses.html', course = courses)
 
+"""
 @student.route('/data_students', methods=['POST','GET'])
 def data_students_page():
     form = StudentForm()
@@ -64,3 +65,4 @@ def delete_row(id):
     else:
         flash('Delete was not successful.')
     
+"""

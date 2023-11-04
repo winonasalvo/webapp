@@ -40,13 +40,14 @@ class Students(object):
             result = curs.fetchall()
         return result
 
+    """
     @classmethod
     def edit(cls, id):
         curs = mysql.cursor()
         sql = f"SELECT * from student WHERE `id` = '{id}'" 
         curs.execute(sql)
         id = curs.fetchall()
-        return id
+        return id """
 
     @classmethod
     def delete(cls,id):
@@ -59,6 +60,62 @@ class Students(object):
         except:
             return False
         
+    
+    def search(self, keyword: str = None, field: str = None):
+        keyword = keyword.upper()
+        students = self.all()
+        result = []
+        print("search: ", students)
+        if field is None: 
+            result = self.search_by_field(students, keyword, 'all')
+        elif field == 'id':
+            result = self.search_by_field(students, keyword, 'id')
+        elif field == 'firstname':
+            result = self.search_by_field(students, keyword, 'firstname')
+        elif field == 'lastname':
+            result = self.search_by_field(students, keyword, 'lastname')
+        elif field == 'gender':
+            result = self.search_by_field(students, keyword, 'gender')
+        elif field == 'year':
+            result = self.search_by_field(students, keyword, 'year')
+        elif field == 'course':
+            result = self.search_by_field(students, keyword, 'course')
+        
+        return result
+
+    @staticmethod
+    def search_by_field(rows: list = None, keyword: str = None, field: str = None) -> list:
+        result = []
+        for row in rows:
+            row_allcaps = [str(cell).upper() for cell in row]
+
+            if field == 'all':
+                if keyword in row_allcaps:
+                    result.append(row)
+            elif field == 'id':
+                if keyword == row_allcaps[0]:
+                    result.append(row)
+                    return result
+            elif field == 'firstname':
+                if keyword == row_allcaps[1]:
+                    result.append(row)
+            elif field == 'lastname':
+                if keyword == row_allcaps[2]:
+                    result.append(row)
+            elif field == 'gender':
+                if keyword == row_allcaps[3]:
+                    result.append(row)
+            elif field == 'year':
+                if keyword == row_allcaps[4]:
+                    result.append(row)
+            elif field == 'course':
+                print('course', keyword, row_allcaps[5])
+                if keyword == row_allcaps[5]:
+                    result.append(row)
+
+        return result
+
+
         
 
 class Courses(object):
@@ -131,7 +188,6 @@ class Courses(object):
         curs.execute(sql)
         result = [item[0] for item in curs.fetchall()]
         return result
-
 
 class Colleges(object):
 

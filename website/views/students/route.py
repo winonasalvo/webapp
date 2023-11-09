@@ -24,9 +24,10 @@ def data_students_page():
         students.add() 
         print("students added")
         return redirect('/')
-    
+        
     else:
         return render_template('students/data_students.html', form = form)
+
     
 @student.route('/edit_students/<id>', methods=['GET','POST'])
 def edit_students_page(id):
@@ -50,7 +51,7 @@ def delete_row(id):
     print(id)
 
     students = models.Students(id = form.id.data, fname=form.fname.data, lname=form.lname.data, gender=form.gender.data, year= form.year.data, course=form.course.data)
-
+    students.delete(id)
     flash('Delete Success!')
     print("flash")
     return redirect('/')
@@ -66,29 +67,31 @@ def search() -> str:
         user_input = request.form.get('user-input')
         field = request.form.get('field')
         result = models.Students()
+        print("field", field)
         print("result", result)
         
 
         if field == 'select':
-            result.search(keyword=user_input)
+            result = result.search(keyword=user_input)
         elif field == 'id':
-            result.search(keyword=user_input, field='id')
+            result = result.search(keyword=user_input, field='id')
         elif field == 'first':
-            result.search(keyword=user_input, field='firstname')
+            result = result.search(keyword=user_input, field='fname')
         elif field == 'last':
-            result.search(keyword=user_input, field='lastname')
+            result = result.search(keyword=user_input, field='lname')
         elif field == 'gender':
-            result.search(keyword=user_input, field='gender')
+            result = result.search(keyword=user_input, field='gender')
         elif field == 'year':
-            result.search(keyword=user_input, field='year')
+            result = result.search(keyword=user_input, field='year')
         elif field == 'course':
-            result.search(keyword=user_input, field='course')
+            result = result.search(keyword=user_input, field='course')
         else:
             result = []
 
         print(str(len([result])))
         if result != None:
-            return render_template('/students/students.html')
+            student = result
+            return render_template('/students/students.html', student = student)
         else:
             flash(f'No student found', 'info')
             return render_template('/students/students.html')

@@ -4,13 +4,30 @@
 <div class="row">
     <div class="newreg">
         <a href="{{ url_for('course.data_courses_page') }}" class="btn btn-primary">New </a>
-        <div class = "search-container">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
     </div>
 </div>
 <div>
+
+<div class="pt-3 pb-3 d-flex align-items-center caption-lower">
+    <form class="pt-3 pb-3 d-flex align-items-center caption-lower" method="post" action="{{ url_for('student.search') }}">
+        <select id="field" name="field" class="form-select p-2">
+            <option value="select">Select Field</option>
+            <option value="id">Student ID</option>
+            <option value="first">First Name</option>
+            <option value="last">Last Name</option>
+            <option value="gender">Gender</option>
+            <option value="year">Year Level</option>
+            <option value="course">Course</option>
+        </select>
+        <input id="searchField" type="text" class="p-2 m-2 searchfield" style="width: 600px;" name="user-input" placeholder="Type to search using ID, Name, Gender, Level, and Course">
+        <button class="btn-search">
+            <div class="search">
+                <div class="icon"></div>
+            </div>
+        </button>
+    </form>
+</div>
+
 
 <div>
     <div class="row mt-2">
@@ -31,6 +48,7 @@
                     <td>{{course['college']}}</td>
                     <td>
                         <a href = "{{ url_for('course.edit_courses_page', course_code = course.course_code ) }}" ><button  class="btn btn-warning" >Edit</button></a>
+                        <a href="{{ url_for('course.course_view_page', course_code = course.course_code) }}" class="btn btn-primary">View Students </a>
                         <button class="btn btn-danger btn-delete" id="{{ course['course_code']}}" onclick="deleteCourse(this.id)">Delete</button>
                     </td>
                 </tr>

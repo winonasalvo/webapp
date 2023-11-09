@@ -1,11 +1,18 @@
 {%extends 'base.html'%}{%block title%}Available Colleges{%endblock title%}
 {%block content%}
+<div class="row">
+  <div class="newreg">
+      <a href="{{ url_for('college.data_colleges_page') }}" class="btn btn-primary">New </a>
+  </div>
+</div>
+<div>
+
 <div >
       <div class="row mt-2">
         <table class="table">
             <thead>
             <tr>
-                <th>Collge</th>
+                <th>College</th>
                 <th>College Name</th>
               <th></th>
             </tr>
@@ -15,6 +22,11 @@
             <tr>
               <td>{{college['college_code']}}</td>
               <td>{{college['college_name']}}</td>
+              <td>
+                <a href = "{{ url_for('college.edit_college_page', college_code = college.college_code ) }}" ><button  class="btn btn-warning" >Edit</button></a>
+                <a href="{{ url_for('college.course_view_page', college_code = college.college_code) }}" class="btn btn-primary">View Students </a>
+                <button class="btn btn-danger btn-delete" id="{{ college['college_code']}}" onclick="deleteCollege(this.id)">Delete</button>
+            </td>
             </tr>
         {% endfor %}
           </tbody>

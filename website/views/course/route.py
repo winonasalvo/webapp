@@ -11,6 +11,13 @@ def course_page():
     print(courses)
     return render_template('courses/courses.html', course = courses)
 
+@course.route('/courses/view_students/<course_code>')
+def course_view_page(course_code):
+    courses = models.Students.fetch(course_code)
+
+    return render_template('students/students.html', student = courses)
+
+
 @course.route('/data_courses', methods=['POST','GET'])
 def data_courses_page():
     form = CourseForm()
@@ -31,15 +38,11 @@ def data_courses_page():
 @course.route('/edit_course/<course_code>', methods=['GET','POST'])
 def edit_courses_page(course_code):
     form = CourseForm()
-    data = models.Courses.edit(course_code)
-    
-    print(data)
 
     #print(data.id)
     if request.method == 'POST' and form.validate():
         courses = models.Courses(course_code=form.course_code.data, course_name=form.course_name.data, college=form.college.data)
         print("courses", courses)
-        print(data[0]['course_code'])
 
         courses.update(course_code) 
         

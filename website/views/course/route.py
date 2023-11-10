@@ -69,3 +69,35 @@ def delete_course_row(course_code):
     else:
         flash('Delete was not successful.')
         return redirect('/data_courses')
+    
+@course.route('/course/search', methods=['GET', 'POST'])
+def search() -> str:
+    if request.method == 'POST':
+
+        user_input = request.form.get('user-input')
+        field = request.form.get('field')
+        result = models.Courses()
+        print("field", field)
+        print("result", result)
+        
+
+        if field == 'select':
+            result = result.search(keyword=user_input)
+        elif field == 'course':
+            result = result.search(keyword=user_input, field='course')
+        elif field == 'name':
+            result = result.search(keyword=user_input, field='name')
+        elif field == 'college':
+            result = result.search(keyword=user_input, field='college')
+        else:
+            result = []
+
+        print(str(len([result])))
+        if result != None:
+            courses = result
+            return render_template('/courses/courses.html', course = courses)
+        else:
+            flash(f'No student found', 'info')
+            return render_template('/courses/courses.html')
+    else:
+        return redirect(url_for('course.courses'))

@@ -175,6 +175,45 @@ class Courses(object):
         curs.execute(sql)
         mysql.commit()
 
+    def search(self, keyword: str = None, field: str = None):
+        keyword = keyword.upper()
+        students = self.all()
+        result = []
+        print("keyword", keyword)
+        if field is None: 
+            result = self.search_by_field(students, keyword, 'all')
+        elif field == 'course':
+            result = self.search_by_field(students, keyword, 'course')
+        elif field == 'name':
+            result = self.search_by_field(students, keyword, 'name')
+        elif field == 'college':
+            result = self.search_by_field(students, keyword, 'college')
+
+        print("result2", result)
+        return result
+
+    @staticmethod
+    def search_by_field(rows: list = None, keyword: str = None, field: str = None) -> list:
+        result = []
+        for row in rows:
+            row = {key: value.upper() for key, value in row.items()}
+            print('row1', row)
+            if field == 'all':
+                for key, value in row.items():
+                    if keyword == value:
+                        result.append(row)
+            elif field == 'course':
+                if keyword == row['course_code']:
+                    result.append(row)
+            elif field == 'name':
+                if keyword == row['course_name']:
+                    result.append(row)
+            elif field == 'college':
+                if keyword == row['college']:
+                    result.append(row)
+        print(result)
+        return result
+    
     @classmethod
     def all(cls):
         cursor = mysql.cursor()

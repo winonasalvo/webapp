@@ -1,5 +1,16 @@
 {%extends 'base.html'%}{%block title%}Available Colleges{%endblock title%}
 {%block content%}
+
+<style>
+  .header {
+    padding: 10px;
+    text-align: center;
+  }
+</style>
+<br><br>
+<header class="header">
+  <h1>Colleges Information</h1>
+</header>
 <div class="row">
   <div class="newreg">
       <a href="{{ url_for('college.data_colleges_page') }}" class="btn btn-primary">New </a>
